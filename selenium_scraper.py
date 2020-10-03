@@ -1,6 +1,3 @@
-#This one is not currently working - but is an option
-#Delete if not being used
-
 import time
 
 from bs4 import BeautifulSoup
@@ -8,10 +5,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from tabulate import tabulate
 
-
 options = Options()
 options.headless = False
-driver = webdriver.Chrome(options=options)
+chromedriver = "/Users/pauld/Documents/Python/chromedriver.exe"
+driver = webdriver.Chrome(options=options, executable_path=chromedriver)
 
 # Use the web browser to access the url
 driver.get("https://www.scoreboard.com/en/match/SO3Fg7NR/#match-statistics;0")
@@ -38,6 +35,9 @@ away_team = grab_tags(".detail-experimental .statText--awayValue")
 # A list of tuples -> [(Ball Possesion, 53%, 47%), (Goal Attempts, 10, 5)...]
 match_data = list(zip(headers, home_team, away_team))
 
+home_team = soup.find('div', class_='tname-home').a.text
+away_team = soup.find('div', class_='tname-away').a.text
+
 split_value = 15
 # split match data list stat table -> there are 15 items per table -> 3 tables
 statistics = [
@@ -48,4 +48,4 @@ statistics = [
 match, first_half, second_half = statistics
 
 # print any of them
-print(tabulate(match, headers=["Stat:", "Home Team", "Away Team"]))
+print(tabulate(match, headers=["Stat:", home_team, away_team]))
