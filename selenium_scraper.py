@@ -35,8 +35,11 @@ away_team = grab_tags(".detail-experimental .statText--awayValue")
 # A list of tuples -> [(Ball Possesion, 53%, 47%), (Goal Attempts, 10, 5)...]
 match_data = list(zip(headers, home_team, away_team))
 
+# home and way team names and score
 home_team = soup.find('div', class_='tname-home').a.text
 away_team = soup.find('div', class_='tname-away').a.text
+home_score = soup.select_one('.current-result .scoreboard:nth-child(1)').text
+away_score = soup.select_one('.current-result .scoreboard:nth-child(2)').text
 
 split_value = 15
 # split match data list stat table -> there are 15 items per table -> 3 tables
@@ -48,4 +51,4 @@ statistics = [
 match, first_half, second_half = statistics
 
 # print any of them
-print(tabulate(match, headers=["Stat:", home_team, away_team]))
+print(tabulate(match, headers=["Stat:", home_team + " " + home_score, away_team + " " + away_score]))

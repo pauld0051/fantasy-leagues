@@ -51,10 +51,10 @@ Continued with adding all the variables. Scraper now accurately picks up:
 
 - *Dangerous Attacks*
 
-Much of the source code was aided by Andrej Kesely at [stackoverflow](https://bit.ly/3lgGmhr)
+Much of the source code was aided by Andrej Kesely at [stackoverflow](https://bit.ly/3lgGmhr).
 
 Second version of the scoreboard scraper now also works. This is titled selenium_scraper.py. This requires an install of [selenium](https://pypi.org/project/selenium/) and [chrome driver](https://chromedriver.chromium.org/downloads) with path. Before installing check your Chrome browser version because this actually opens a browser, reads it, closes it, and parses the information.
 
-Credit for the selenium version: [baduker from stackoverflow](https://bit.ly/3lgGmhr).
+Credit for the selenium version: baduker at [stackoverflow](https://bit.ly/3lgGmhr).
 
 The next phase is to get this data into usable formats.
