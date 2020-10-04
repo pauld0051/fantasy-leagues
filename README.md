@@ -69,3 +69,8 @@ It is not clear yet what caused this error to only occur in this game. The curre
 - Added CSV support for scoreboard_scrape.py
 
 Currently the CSV support, although works as expected, extends the code to over 250 lines lone. The selenium_scraper code is significantly shorter, but CSV support has not been as easy to come by. Currently, red cards (for instance) throw up a noneType error as if no red cards are given, the stat is not available on the site. This means that the code stops if no red cards are present. Although soup can skip this error, it would then mean the CSV won't show "0" for red cards. Working on a fix for this currently.
+
+- Update on Red Card Error
+Have fixed the error with help from Gad at [stackoverflow](https://bit.ly/33uiMaM)
+
+All data now successfully enters CSV format.

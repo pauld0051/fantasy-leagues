@@ -144,15 +144,19 @@ print(home_team, "had " + home_value11, "fouls")
 print(away_team, "had " + away_value11, "fouls")
 print()
 
-# locate row, that contains "Red Cards": Currently commented out until a noneType error can be overcome
-#row = soup.select_one('.statRow:has(*:contains("Red Cards"))')
+# locate row, that contains "Red Cards": 
+row = soup.select_one('.statRow:has(*:contains("Red Cards"))')
 
-#home_value12 = row.select_one('.statText--homeValue').text
-#away_value12 = row.select_one('.statText--awayValue').text
+try:
+    home_value12 = row.select_one('.statText--homeValue').text
+    away_value12 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value12 = "0"
+    away_value12 = "0"
 
-#print(home_team, "had " + home_value12, "red cards")
-#print(away_team, "had " + away_value12, "red cards")
-#print()
+print(home_team, "had " + home_value12, "red cards")
+print(away_team, "had " + away_value12, "red cards")
+print()
 
 # locate row, that contains "Yellow Cards":
 row = soup.select_one('.statRow:has(*:contains("Yellow Cards"))')
@@ -231,8 +235,8 @@ with open('week_x.csv', 'w', newline='') as csvfile:
         {'Stats:': row10, home_team: home_value10, away_team: away_value10})
     writer.writerow(
         {'Stats:': row11, home_team: home_value11, away_team: away_value11})
-    #writer.writerow(
-        #{'Stats:': row12, home_team: home_value12, away_team: away_value12})
+    writer.writerow(
+        {'Stats:': row12, home_team: home_value12, away_team: away_value12})
     writer.writerow(
         {'Stats:': row13, home_team: home_value13, away_team: away_value13})
     writer.writerow(
