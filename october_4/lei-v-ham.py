@@ -1,3 +1,5 @@
+# https://www.scoreboard.com/game/ABcxa2a7/#game-statistics;0
+
 import time
 
 from bs4 import BeautifulSoup
@@ -11,7 +13,7 @@ chromedriver = "/Users/pauld/Documents/Python/chromedriver.exe"
 driver = webdriver.Chrome(options=options, executable_path=chromedriver)
 
 # Use the web browser to access the url
-driver.get("https://www.scoreboard.com/en/match/SO3Fg7NR/#match-statistics;0")
+driver.get("https://www.scoreboard.com/game/ABcxa2a7/#game-statistics;0")
 # wait for all the elements to load
 time.sleep(2)
 
@@ -51,4 +53,5 @@ statistics = [
 match, first_half, second_half = statistics
 
 # print any of them
-print(tabulate(match, headers=["Stat:", home_team + " " + home_score, away_team + " " + away_score]))
+print(tabulate(match, headers=["Stat:", home_team +
+                               " " + home_score, away_team + " " + away_score]))
