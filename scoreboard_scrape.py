@@ -3,7 +3,6 @@ import re
 import csv
 from bs4 import BeautifulSoup
 
-
 source = requests.get('https://www.scoreboard.com/en/match/SO3Fg7NR/#match-statistics;0').text
 
 soup = BeautifulSoup(source, 'lxml')
@@ -33,6 +32,7 @@ row14 = "Total Passes"
 row15 = "Tackles"
 row16 = "Attacks"
 row17 = "Dangerous Attacks"
+row18 = "Goals Against"
 
 url = 'https://www.scoreboard.com/en/match/SO3Fg7NR/#match-statistics;0'
 
@@ -243,3 +243,5 @@ with open('week_x.csv', 'w', newline='') as csvfile:
         {'Stats:': row16, home_team: home_value16, away_team: away_value16})
     writer.writerow(
         {'Stats:': row17, home_team: home_value17, away_team: away_value17})
+    writer.writerow(
+        {'Stats:': row18, home_team: away_score, away_team: home_score})
