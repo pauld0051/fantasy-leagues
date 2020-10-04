@@ -1,4 +1,5 @@
 import time
+import csv
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -21,11 +22,9 @@ soup = BeautifulSoup(driver.page_source, "html.parser")
 # Close the web browser
 driver.close()
 
-
 # This is used to build a list of text values from all tags
 def grab_tags(css_selector: str) -> list:
     return [t.getText(strip=True) for t in soup.select(css_selector)]
-
 
 headers = grab_tags(".detail-experimental .statText--titleValue")
 home_team = grab_tags(".detail-experimental .statText--homeValue")

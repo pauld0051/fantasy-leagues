@@ -58,3 +58,10 @@ Second version of the scoreboard scraper now also works. This is titled selenium
 Credit for the selenium version: baduker at [stackoverflow](https://bit.ly/3lgGmhr).
 
 The next phase is to get this data into usable formats.
+
+*October 4*: Completed one full week for data but found a bug occurring with the Man-United v Tottenham game.
+
+*'match, first_half, second_half = statistics*
+*ValueError: too many values to unpack (expected 3)*
+
+It is not clear yet what caused this error to only occur in this game. The current fix was to use the code from scoreboard_scrape.py. This ran successfully and may become the code for the scraper as opposed to the more neat and tidy selenium_scraper.py.

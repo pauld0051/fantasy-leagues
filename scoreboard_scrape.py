@@ -1,5 +1,6 @@
 import requests
 import re
+import csv
 from bs4 import BeautifulSoup
 
 source = requests.get('https://www.scoreboard.com/en/match/SO3Fg7NR/#match-statistics;0').text
@@ -175,5 +176,4 @@ away_value = row.select_one('.statText--awayValue').text
 print(home_team, "had " + home_value, "dangerous attacks")
 print(away_team, "had " + away_value, "dangerous attacks")
 print()
-
 
