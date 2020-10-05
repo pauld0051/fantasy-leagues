@@ -2,6 +2,7 @@
 
 import requests
 import re
+import csv
 from bs4 import BeautifulSoup
 
 source = requests.get(
@@ -9,17 +10,46 @@ source = requests.get(
 
 soup = BeautifulSoup(source, 'lxml')
 
-home_team = soup.find('div', class_='tname-home').a.text
-away_team = soup.find('div', class_='tname-away').a.text
-home_score = soup.select_one('.current-result .scoreboard:nth-child(1)').text
-away_score = soup.select_one('.current-result .scoreboard:nth-child(2)').text
+week = "4"
+teams = "utd-v-tot"
+
+row1 = "Goals For"
+row2 = "Possession"
+row3 = "Goal Attempts"
+row4 = "Shot on Goal"
+row5 = "Shots off Goal"
+row6 = "Blocked Shots"
+row7 = "Free kicks"
+row8 = "Corner Kicks"
+row9 = "Offsides"
+row10 = "Goalkeeper Saves"
+row11 = "Fouls"
+row12 = "Red Cards"
+row13 = "Yellow Cards"
+row14 = "Total Passes"
+row15 = "Tackles"
+row16 = "Attacks"
+row17 = "Dangerous Attacks"
+row18 = "Goals Against"
+
+try:
+    home_team = soup.find('div', class_='tname-home').a.text
+    away_team = soup.find('div', class_='tname-away').a.text
+    home_score = soup.select_one(
+        '.current-result .scoreboard:nth-child(1)').text
+    away_score = soup.select_one(
+        '.current-result .scoreboard:nth-child(2)').text
+except AttributeError:
+    home_team = "TBA"
+    away_team = "TBA"
+    home_score = "0"
+    away_score = "0"
+
 print("The home team is " + home_team, "and they scored " + home_score)
 print("The away team is " + away_team, "and they scored " + away_score)
 print()
-#home_stats = soup.select_one('div', id='tab-match-statistics', class_=statText--homeValue:nth-child(1)').text
-#print(home_stats)
 
-url = 'https://www.scoreboard.com/en/match/SO3Fg7NR/#match-statistics;0'
+url = 'https://www.scoreboard.com/en/match/l2dtbMED/#match-statistics;0'
 
 headers = {'X-Fsign': 'SW9D1eZo'}
 match_id = re.search(r'match/([^/]+)/', url).group(1)
@@ -32,149 +62,265 @@ soup = BeautifulSoup(requests.get(
 # locate row, that contains "Ball Possession":
 row = soup.select_one('.statRow:has(*:contains("Ball Possession"))')
 
-home_value = row.select_one('.statText--homeValue').text.replace('%', '')
-away_value = row.select_one('.statText--awayValue').text.replace('%', '')
+try:
+    home_value2 = row.select_one('.statText--homeValue').text.replace('%', '')
+    away_value2 = row.select_one('.statText--awayValue').text.replace('%', '')
+except AttributeError:
+    home_value2 = "0"
+    away_value2 = "0"
 
-print(home_team, "had " + home_value, "% ball possession")
-print(away_team, "had " + away_value, "% ball possession")
+print(home_team, "had " + home_value2, "% ball possession")
+print(away_team, "had " + away_value2, "% ball possession")
 print()
 
 # locate row, that contains "Goal Attempts":
 row = soup.select_one('.statRow:has(*:contains("Goal Attempts"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value3 = row.select_one('.statText--homeValue').text
+    away_value3 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value3 = "0"
+    away_value3 = "0"
 
-print(home_team, "had " + home_value, "goal attempts")
-print(away_team, "had " + away_value, "goal attempts")
+print(home_team, "had " + home_value3, "goal attempts")
+print(away_team, "had " + away_value3, "goal attempts")
 print()
 
 # locate row, that contains "Shots on Goal":
 row = soup.select_one('.statRow:has(*:contains("Shots on Goal"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value4 = row.select_one('.statText--homeValue').text
+    away_value4 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value4 = "0"
+    away_value4 = "0"
 
-print(home_team, "had " + home_value, "shots on goal")
-print(away_team, "had " + away_value, "shots on goal")
+print(home_team, "had " + home_value4, "shots on goal")
+print(away_team, "had " + away_value4, "shots on goal")
 print()
 
 # locate row, that contains "Shots off Goal":
 row = soup.select_one('.statRow:has(*:contains("Shots off Goal"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value5 = row.select_one('.statText--homeValue').text
+    away_value5 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value5 = "0"
+    away_value5 = "0"
 
-print(home_team, "had " + home_value, "shots off goal")
-print(away_team, "had " + away_value, "shots off goal")
+print(home_team, "had " + home_value5, "shots off goal")
+print(away_team, "had " + away_value5, "shots off goal")
 print()
 
 # locate row, that contains "Blocked Shots":
 row = soup.select_one('.statRow:has(*:contains("Blocked Shots"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value6 = row.select_one('.statText--homeValue').text
+    away_value6 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value6 = "0"
+    away_value6 = "0"
 
-print(home_team, "had " + home_value, "blocked shots")
-print(away_team, "had " + away_value, "blocked shots")
+print(home_team, "had " + home_value6, "blocked shots")
+print(away_team, "had " + away_value6, "blocked shots")
 print()
 
 # locate row, that contains "Free Kicks":
 row = soup.select_one('.statRow:has(*:contains("Free Kicks"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value7 = row.select_one('.statText--homeValue').text
+    away_value7 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value7 = "0"
+    away_value7 = "0"
 
-print(home_team, "had " + home_value, "free kicks")
-print(away_team, "had " + away_value, "free kicks")
+print(home_team, "had " + home_value7, "free kicks")
+print(away_team, "had " + away_value7, "free kicks")
 print()
 
 # locate row, that contains "Corner Kicks":
 row = soup.select_one('.statRow:has(*:contains("Corner Kicks"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value8 = row.select_one('.statText--homeValue').text
+    away_value8 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value8 = "0"
+    away_value8 = "0"
 
-print(home_team, "had " + home_value, "corner kicks")
-print(away_team, "had " + away_value, "corner kicks")
+print(home_team, "had " + home_value8, "corner kicks")
+print(away_team, "had " + away_value8, "corner kicks")
 print()
 
 # locate row, that contains "Offsides":
 row = soup.select_one('.statRow:has(*:contains("Offsides"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value9 = row.select_one('.statText--homeValue').text
+    away_value9 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value9 = "0"
+    away_value9 = "0"
 
-print(home_team, "had " + home_value, "offsides")
-print(away_team, "had " + away_value, "offsides")
+print(home_team, "had " + home_value9, "offsides")
+print(away_team, "had " + away_value9, "offsides")
 print()
 
 # locate row, that contains "Goalkeeper Saves":
 row = soup.select_one('.statRow:has(*:contains("Goalkeeper Saves"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value10 = row.select_one('.statText--homeValue').text
+    away_value10 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value10 = "0"
+    away_value10 = "0"
 
-print(home_team, "had " + home_value, "goalkeeper saves")
-print(away_team, "had " + away_value, "goalkeeper saves")
+print(home_team, "had " + home_value10, "goalkeeper saves")
+print(away_team, "had " + away_value10, "goalkeeper saves")
 print()
 
 # locate row, that contains "Fouls":
 row = soup.select_one('.statRow:has(*:contains("Fouls"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value11 = row.select_one('.statText--homeValue').text
+    away_value11 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value11 = "0"
+    away_value11 = "0"
 
-print(home_team, "had " + home_value, "fouls")
-print(away_team, "had " + away_value, "fouls")
+print(home_team, "had " + home_value11, "fouls")
+print(away_team, "had " + away_value11, "fouls")
+print()
+
+# locate row, that contains "Red Cards":
+row = soup.select_one('.statRow:has(*:contains("Red Cards"))')
+
+try:
+    home_value12 = row.select_one('.statText--homeValue').text
+    away_value12 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value12 = "0"
+    away_value12 = "0"
+
+print(home_team, "had " + home_value12, "red cards")
+print(away_team, "had " + away_value12, "red cards")
 print()
 
 # locate row, that contains "Yellow Cards":
 row = soup.select_one('.statRow:has(*:contains("Yellow Cards"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value13 = row.select_one('.statText--homeValue').text
+    away_value13 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value13 = "0"
+    away_value13 = "0"
 
-print(home_team, "had " + home_value, "yellow cards")
-print(away_team, "had " + away_value, "yellow cards")
+print(home_team, "had " + home_value13, "yellow cards")
+print(away_team, "had " + away_value13, "yellow cards")
 print()
 
 # locate row, that contains "Total Passes":
 row = soup.select_one('.statRow:has(*:contains("Total Passes"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value14 = row.select_one('.statText--homeValue').text
+    away_value14 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value14 = "0"
+    away_value14 = "0"
 
-print(home_team, "had " + home_value, "total passes")
-print(away_team, "had " + away_value, "total passes")
+print(home_team, "had " + home_value14, "total passes")
+print(away_team, "had " + away_value14, "total passes")
 print()
 
 # locate row, that contains "Tackles":
 row = soup.select_one('.statRow:has(*:contains("Tackles"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value15 = row.select_one('.statText--homeValue').text
+    away_value15 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value15 = "0"
+    away_value15 = "0"
 
-print(home_team, "had " + home_value, "tackles")
-print(away_team, "had " + away_value, "tackles")
+print(home_team, "had " + home_value15, "tackles")
+print(away_team, "had " + away_value15, "tackles")
 print()
 
 # locate row, that contains "Attacks":
 row = soup.select_one('.statRow:has(*:contains("Attacks"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value16 = row.select_one('.statText--homeValue').text
+    away_value16 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value16 = "0"
+    away_value16 = "0"
 
-print(home_team, "had " + home_value, "attacks")
-print(away_team, "had " + away_value, "attacks")
+print(home_team, "had " + home_value16, "attacks")
+print(away_team, "had " + away_value16, "attacks")
 print()
 
 # locate row, that contains "Dangerous Attacks":
 row = soup.select_one('.statRow:has(*:contains("Dangerous Attacks"))')
 
-home_value = row.select_one('.statText--homeValue').text
-away_value = row.select_one('.statText--awayValue').text
+try:
+    home_value17 = row.select_one('.statText--homeValue').text
+    away_value17 = row.select_one('.statText--awayValue').text
+except AttributeError:
+    home_value17 = "0"
+    away_value17 = "0"
 
-print(home_team, "had " + home_value, "dangerous attacks")
-print(away_team, "had " + away_value, "dangerous attacks")
+print(home_team, "had " + home_value17, "dangerous attacks")
+print(away_team, "had " + away_value17, "dangerous attacks")
 print()
+
+with open('wk-' + week + "-" + teams + '.csv', 'w', newline='') as csvfile:
+    fieldnames = ['Stats:', home_team, away_team]
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    writer.writerow(
+        {'Stats:': row1, home_team: home_score, away_team: away_score})
+    writer.writerow(
+        {'Stats:': row2, home_team: home_value2, away_team: away_value2})
+    writer.writerow(
+        {'Stats:': row3, home_team: home_value3, away_team: away_value3})
+    writer.writerow(
+        {'Stats:': row4, home_team: home_value4, away_team: away_value4})
+    writer.writerow(
+        {'Stats:': row5, home_team: home_value5, away_team: away_value5})
+    writer.writerow(
+        {'Stats:': row6, home_team: home_value6, away_team: away_value6})
+    writer.writerow(
+        {'Stats:': row7, home_team: home_value7, away_team: away_value7})
+    writer.writerow(
+        {'Stats:': row8, home_team: home_value8, away_team: away_value8})
+    writer.writerow(
+        {'Stats:': row9, home_team: home_value9, away_team: away_value9})
+    writer.writerow(
+        {'Stats:': row10, home_team: home_value10, away_team: away_value10})
+    writer.writerow(
+        {'Stats:': row11, home_team: home_value11, away_team: away_value11})
+    writer.writerow(
+        {'Stats:': row12, home_team: home_value12, away_team: away_value12})
+    writer.writerow(
+        {'Stats:': row13, home_team: home_value13, away_team: away_value13})
+    writer.writerow(
+        {'Stats:': row14, home_team: home_value14, away_team: away_value14})
+    writer.writerow(
+        {'Stats:': row15, home_team: home_value15, away_team: away_value15})
+    writer.writerow(
+        {'Stats:': row16, home_team: home_value16, away_team: away_value16})
+    writer.writerow(
+        {'Stats:': row17, home_team: home_value17, away_team: away_value17})
+    writer.writerow(
+        {'Stats:': row18, home_team: away_score, away_team: home_score})
