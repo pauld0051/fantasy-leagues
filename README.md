@@ -1,4 +1,7 @@
 # fantasy-leagues
 
-October 2: Added first scraper set to scrape a known classroom site designed for scraping. Original files and tutorial found here: https://www.freecodecamp.org/news/web-scraping-python-tutorial-how-to-scrape-data-from-a-website/
+API version (as opposed to scraping).
 
+Using API from <https://www.thesportsdb.com/>
+
+See full discussion with moderators: <https://www.thesportsdb.com/forum_topic.php?t=5151>
