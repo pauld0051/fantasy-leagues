@@ -74,3 +74,8 @@ Currently the CSV support, although works as expected, extends the code to over 
 Have fixed the error with help from Gad at [stackoverflow](https://bit.ly/33uiMaM)
 
 All data now successfully enters CSV format.
+
+The use of an API may still become necessary due to copyright rules and regulations. One option could possibly come from here: <https://www.api-football.com/documentation#fixtures-statistics> but a second option recently popped up too:
+
+- <https://www.thesportsdb.com/event/103272>
+- <https://www.thesportsdb.com/api/v1/json/1/lookupeventstats.php?id=1032723>
