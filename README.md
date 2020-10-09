@@ -1,4 +1,4 @@
 # fantasy-leagues
 
-October 2: Added first scraper set to scrape a known classroom site designed for scraping. Original files and tutorial found here: https://www.freecodecamp.org/news/web-scraping-python-tutorial-how-to-scrape-data-from-a-website/
-
+- October 10
+Added a selections file using PyInquirer, have yet to establish a method of removing teams from the list. But have added home and away team goals as this does not require removal of teams from the list. Current teams (away and home) are only set up alphabetically they are not representative of a particular week. That data will need to be mined via API and then parsed into the home and away teams list at a later stage.
